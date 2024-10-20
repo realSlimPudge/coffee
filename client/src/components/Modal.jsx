@@ -1,9 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Modal from 'react-modal'
 
 Modal.setAppElement('#root')
 
 const CustomModal = ({ isOpen, onRequestClose, item, vol, adds }) => {
+	const [modalClasses, setModalClasses] = useState('')
+	const [overlayClasses, setOverlayClasses] = useState('')
+	const [modalShow, setModalShow] = useState(true)
+
+	useEffect(() => {
+		if (isOpen) {
+			setModalClasses('modal-content-inner modal-enter')
+			setOverlayClasses('overlay overlay-enter')
+			setTimeout(() => {
+				setModalClasses('modal-content-inner modal-enter-active')
+				setOverlayClasses('overlay overlay-enter-active')
+			}, 10)
+		} else {
+			setModalClasses('modal-content-inner modal-exit')
+			setOverlayClasses('overlay overlay-exit')
+			setTimeout(() => {
+				setModalClasses('modal-content-inner modal-exit-active')
+				setOverlayClasses('overlay overlay-exit-active')
+			}, 10)
+		}
+	}, [isOpen])
+
+	const handleClose = () => {
+		setModalClasses('modal-content-inner modal-exit')
+		setOverlayClasses('overlay overlay-exit')
+		setTimeout(() => {
+			setModalClasses('modal-content-inner modal-exit-active')
+			setOverlayClasses('overlay overlay-exit-active')
+			setTimeout(() => {
+				onRequestClose()
+			}, 300)
+		}, 10)
+	}
+
 	if (!item || !vol) {
 		return null
 	}
@@ -15,11 +49,11 @@ const CustomModal = ({ isOpen, onRequestClose, item, vol, adds }) => {
 			isOpen={isOpen}
 			onRequestClose={onRequestClose}
 			contentLabel='Product Details'
-			className='modal'
-			overlayClassName='overlay'
+			className={overlayClasses}
+			overlayClassName={overlayClasses}
 		>
-			<div className='modal-content'>
-				<button onClick={onRequestClose} className='modal-close-btn'></button>
+			<div className={modalClasses}>
+				<button onClick={handleClose} className='modal-close-btn'></button>
 
 				<div className='modal--info'>
 					<div className='modal--info--main'>

@@ -7,6 +7,9 @@ function App() {
 	const [vol, setVol] = useState([])
 	const [add, setAdd] = useState([])
 
+	const [scrollDown, setScrollDown] = useState(false)
+	const [scrollPos, setScrollPos] = useState(window.pageYOffset)
+
 	async function getItems() {
 		const url = 'http://localhost:3000/api/goods'
 		try {
@@ -28,6 +31,17 @@ function App() {
 		console.log(vol)
 		console.log(add)
 	}, [goods, vol, add])
+	useEffect(() => {
+		const handleScroll = () => {
+			const currentScrollPos = window.pageYOffset
+			setScrollDown(currentScrollPos > scrollPos)
+			setScrollPos(currentScrollPos)
+		}
+		window.addEventListener('scroll', handleScroll)
+		return () => {
+			window.removeEventListener('scroll', handleScroll)
+		}
+	}, [scrollPos])
 
 	const groupedGoods = goods.reduce((acc, good) => {
 		if (!acc[good.category]) {
@@ -66,6 +80,11 @@ function App() {
 					))}
 				</div>
 			</main>
+			<div className={`shopcart ${scrollDown ? 'visible' : ''}`}>
+				<div className='shopcart--button'>
+					<button>Перейти в корзину</button>
+				</div>
+			</div>
 		</div>
 	)
 }

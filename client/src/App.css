@@ -8,6 +8,7 @@
 	width: 430px;
 	margin: 0 auto;
 	background-color: black;
+	padding-bottom: 80px;
 }
 header {
 	background-color: white;
@@ -29,6 +30,37 @@ header div {
 }
 .category h2 {
 	color: white;
+}
+
+.shopcart {
+	background-color: rgba(255, 255, 255, 1);
+	width: 100%;
+	height: 100px;
+	position: fixed;
+	transform: translate(-50%, 0%);
+	bottom: 0%;
+	left: 50%;
+	transition: 300ms ease all;
+	border-radius: 14px 14px 0px 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.shopcart.visible {
+	transform: translate(-50%, 85%);
+}
+.shopcart--button {
+	width: fit-content;
+}
+.shopcart--button button {
+	width: 394px;
+	height: 66px;
+	background-color: black;
+	border-radius: 13px;
+	font-weight: 600;
+	font-size: 20px;
+	color: #fff;
+	box-shadow: 0 3px 11px 3px rgba(119, 114, 176, 0.3);
 }
 .card {
 	background-color: white;
@@ -127,20 +159,42 @@ header div {
 .category--title {
 	margin: 10px 0px;
 }
-.modal {
+
+/* модальное окно */
+
+.modal-content-inner {
 	position: absolute;
-	top: 100%;
+	bottom: 0;
 	left: 50%;
-	transform: translate(-50%, -100%);
+	transform: translateX(-50%);
 	background: white;
 	border-radius: 20px 20px 0px 0px;
 	width: 430px;
 	outline: none;
 	padding: 20px;
+	transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
-.modal-content {
-	width: 100%;
+
+.modal-content-inner.modal-enter {
+	transform: translateX(-50%) translateY(100%);
+	opacity: 0;
 }
+
+.modal-content-inner.modal-enter-active {
+	transform: translateX(-50%) translateY(0);
+	opacity: 1;
+}
+
+.modal-content-inner.modal-exit {
+	transform: translateX(-50%) translateY(0);
+	opacity: 1;
+}
+
+.modal-content-inner.modal-exit-active {
+	transform: translateX(-50%) translateY(100%);
+	opacity: 0;
+}
+
 .overlay {
 	position: fixed;
 	top: 0;
@@ -148,7 +202,26 @@ header div {
 	right: 0;
 	bottom: 0;
 	background: rgba(0, 0, 0, 0.5);
+	transition: opacity 0.3s ease-in-out;
+	backdrop-filter: blur(1px);
 }
+
+.overlay.overlay-enter {
+	opacity: 0;
+}
+
+.overlay.overlay-enter-active {
+	opacity: 1;
+}
+
+.overlay.overlay-exit {
+	opacity: 1;
+}
+
+.overlay.overlay-exit-active {
+	opacity: 0;
+}
+
 .modal-close-btn {
 	margin-left: 365px;
 	margin-bottom: 10px;
@@ -213,6 +286,7 @@ header div {
 .modal--info--text h3 {
 	font-weight: 600;
 	font-size: 20px;
+	margin-bottom: 15px;
 }
 .modal--info--text p {
 	font-weight: 400;

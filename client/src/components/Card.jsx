@@ -8,8 +8,8 @@ export default function Card({ item, vol, adds }) {
 
 	const handleAddClick = () => {
 		setIsModalOpen(true)
-		// setIsVisible(false)
-		// setCount(1)
+		// setIsVisible(false);
+		// setCount(1);
 	}
 
 	const closeModal = () => {
@@ -59,26 +59,26 @@ export default function Card({ item, vol, adds }) {
 						Добавить
 					</button>
 					{/* {isVisible ? (
-					<button onClick={handleAddClick} className='counter--addBtn'>
-						Добавить
-					</button>
-				) : (
-					<div className='counter--interface'>
-						<div>
-							<button onClick={decrement} className='counter--decrement'>
-								-
-							</button>
-						</div>
-						<div>
-							<span>{count}</span>
-						</div>
-						<div>
-							<button onClick={increment} className='counter--increment'>
-								+
-							</button>
-						</div>
-					</div>
-				)} */}
+            <button onClick={handleAddClick} className='counter--addBtn'>
+              Добавить
+            </button>
+          ) : (
+            <div className='counter--interface'>
+              <div>
+                <button onClick={decrement} className='counter--decrement'>
+                  -
+                </button>
+              </div>
+              <div>
+                <span>{count}</span>
+              </div>
+              <div>
+                <button onClick={increment} className='counter--increment'>
+                  +
+                </button>
+              </div>
+            </div>
+          )} */}
 				</div>
 			</div>
 			<CustomModal
