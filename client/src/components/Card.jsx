@@ -51,7 +51,6 @@ export default function Card({ item, vol, adds }) {
 							</div>
 						) : (
 							<></>
-							// test
 						)}
 					</div>
 				))}
